@@ -5,7 +5,7 @@ const sharp = require("sharp");
 const { qrSvg, qrPng } = require("./qr");
 const { buildVcard } = require("./vcard");
 const { markSvg } = require("./logo-svg");
-const { skylineBg } = require("./art");
+const { contourBg } = require("./art");
 
 
 const root = path.join(__dirname, "..");
@@ -76,7 +76,7 @@ async function post(site, outDir) {
   const corm = path.join(root, "node_modules", "@fontsource", "cormorant-garamond", "files");
   write("assets/fonts/cormorant-500.woff2", fs.readFileSync(path.join(corm, "cormorant-garamond-latin-500-normal.woff2")));
   write("assets/fonts/cormorant-400i.woff2", fs.readFileSync(path.join(corm, "cormorant-garamond-latin-400-italic.woff2")));
-  write("assets/skyline.svg", skylineBg());
+  write("assets/contours.svg", contourBg());
   write("robots.txt", "User-agent: *\nAllow: /\n");
 }
 

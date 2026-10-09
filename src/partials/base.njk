@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{{ pageTitle or site.site.title }}</title>
   <meta name="description" content="{{ pageDesc or site.site.description }}">
-  <meta name="theme-color" content="{{ '#f7f5f0' if bodyClass == 'light' else '#071633' }}">
+  <meta name="theme-color" content="#f5f1e8">
   <link rel="canonical" href="{{ site.site.url }}{{ canonicalPath }}">
   <link rel="icon" href="{{ '/favicon.svg' | url }}" type="image/svg+xml">
   <link rel="icon" href="{{ '/favicon-32.png' | url }}" sizes="32x32" type="image/png">
@@ -22,7 +22,7 @@
   <link rel="preload" href="{{ '/assets/fonts/manrope.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/cormorant-500.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   <style>
-    :root { --skyline: url("{{ '/assets/skyline.svg' | url }}"); }
+    :root { --contours: url("{{ '/assets/contours.svg' | url }}"); }
     @font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: normal; font-display: swap; src: url("{{ '/assets/fonts/cormorant-500.woff2' | url }}") format("woff2"); }
     @font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: italic; font-display: swap; src: url("{{ '/assets/fonts/cormorant-400i.woff2' | url }}") format("woff2"); }
     @font-face { font-family: "Manrope"; font-weight: 200 800; font-style: normal; font-display: swap; src: url("{{ '/assets/fonts/manrope.woff2' | url }}") format("woff2"); }
@@ -38,6 +38,7 @@
   </svg>
   <div class="bg" aria-hidden="true"></div>
 
+  <a class="share-fab qr-fab" href="#share" data-open="share" aria-label="Show QR code">{{ icons['qr-code'] | safe }}</a>
   <a class="share-fab" href="#share" data-open="share" aria-label="Share and QR code">{{ icons['share-2'] | safe }}</a>
 
   <div class="sheet" id="share" role="dialog" aria-modal="true" aria-labelledby="share-h">
@@ -60,7 +61,7 @@
   </main>
 
   <footer class="foot">
-    <svg class="mark" aria-hidden="true"><use href="{{ '#logo' if bodyClass == 'light' else '#logo-l' }}"/></svg>
+    <svg class="mark" aria-hidden="true"><use href="#logo"/></svg>
     <p>© {{ site.site.year }} {{ site.company.name }}</p>
     <a class="up" href="#top">{{ icons['arrow-up'] | safe }}Back to top</a>
   </footer>
