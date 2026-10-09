@@ -1,19 +1,13 @@
-{% if site.socials.length %}
-<section class="section" aria-labelledby="connect-h">
-  <span class="label">Connect</span>
-  <h2 id="connect-h">Follow and connect</h2>
-  {% for owner, heading in { company: site.company.name, founder: site.founder.name } %}
-    {% set list = site.socials | socialsFor(owner) %}
-    {% if list.length %}
-    <div class="group">
-      <h3>{{ heading }}</h3>
-      <div class="chips">
-        {% for s in list %}
-        <a class="chip" href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ heading }} on {{ brandNames[s.platform] }}">{{ icons[s.platform] | safe }}{{ brandNames[s.platform] }}</a>
-        {% endfor %}
-      </div>
-    </div>
+{# Expects `socialList` (array of {platform,url}) and `socialWho` (name for labels). Icons without a link stay visible but inert. #}
+<ul class="socials">
+  {% for s in socialList %}
+  <li>
+    {% if s.url %}
+    <a class="soc" href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ socialWho }} on {{ brandNames[s.platform] }}">{{ icons[s.platform] | safe }}</a>
+    {% else %}
+    <span class="soc off" role="img" aria-label="{{ brandNames[s.platform] }} (link coming soon)">{{ icons[s.platform] | safe }}</span>
     {% endif %}
+    <span class="soc-name">{{ brandNames[s.platform] }}</span>
+  </li>
   {% endfor %}
-</section>
-{% endif %}
+</ul>

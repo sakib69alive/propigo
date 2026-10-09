@@ -6,6 +6,10 @@ const { post } = require("./build/post");
 const { qrSvg } = require("./build/qr");
 const { icons, brandNames } = require("./build/icons");
 const logo = require("./build/logo-svg");
+const { heroArt } = require("./build/art");
+
+// Light variant of the logo (navy parts turned near-white) for use on dark backgrounds.
+const logoLight = logo.inner.replace(/#002047/g, "#eef2fa").replace(/pg-fade/g, "pg-fade-l").replace(/pg-gold/g, "pg-gold-l");
 
 const siteFile = process.env.SITE_FILE || path.join(__dirname, "content", "site.yaml");
 const read = (...p) => fs.readFileSync(path.join(__dirname, ...p), "utf8");
@@ -18,6 +22,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("icons", icons);
   eleventyConfig.addGlobalData("brandNames", brandNames);
   eleventyConfig.addGlobalData("logoInner", logo.inner);
+  eleventyConfig.addGlobalData("logoLight", logoLight);
+  eleventyConfig.addGlobalData("heroArt", heroArt());
   eleventyConfig.addGlobalData("logoViewBox", logo.viewBox);
   eleventyConfig.addGlobalData("qrInline", () => qrSvg(site.site.url + "c/"));
   // Styles and the tiny share script are inlined into the page: fewer requests on mobile data.
@@ -26,7 +32,6 @@ module.exports = function (eleventyConfig) {
   );
   eleventyConfig.addGlobalData("js", () => read("src", "scripts", "share.js"));
 
-  eleventyConfig.addFilter("socialsFor", (list, owner) => list.filter((s) => s.owner === owner));
   eleventyConfig.addFilter("encode", (s) => encodeURIComponent(s));
 
   eleventyConfig.on("eleventy.after", async ({ dir }) => {

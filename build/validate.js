@@ -1,6 +1,5 @@
 // Validates content/site.yaml and normalises values. Throws (fails the build) on any error.
-const PLATFORMS = ["facebook", "instagram", "tiktok", "youtube", "linkedin", "x", "threads", "telegram"];
-const OWNERS = ["company", "founder"];
+const PLATFORMS = ["youtube", "facebook", "instagram", "tiktok", "linkedin", "x", "threads", "telegram"];
 
 function normalisePhone(raw, label, errors) {
   const s = String(raw || "").replace(/[\s\-().]/g, "");
@@ -69,15 +68,19 @@ function validate(raw) {
   c.whatsapp_message = String(c.whatsapp_message || "");
   c.email = String(c.email || "").trim();
   if (c.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)) errors.push(`contact.email: "${c.email}" is not a valid email address.`);
-  c.website = httpsUrl(c.website, "contact.website", errors);
 
-  d.socials = (Array.isArray(d.socials) ? d.socials : [])
-    .map((s, i) => {
-      if (!PLATFORMS.includes(s.platform)) errors.push(`socials[${i}].platform "${s.platform}" is unknown. Allowed: ${PLATFORMS.join(", ")}.`);
-      if (!OWNERS.includes(s.owner)) errors.push(`socials[${i}].owner must be "company" or "founder".`);
-      return { owner: s.owner, platform: s.platform, url: httpsUrl(s.url, `socials[${i}].url`, errors) };
-    })
-    .filter((s) => s.url);
+  const rawSoc = d.socials || {};
+  d.socials = {};
+  ["company", "founder"].forEach((owner) => {
+    const m = rawSoc[owner] || {};
+    Object.keys(m).forEach((k) => {
+      if (!PLATFORMS.includes(k)) errors.push(`socials.${owner}.${k} is unknown. Allowed: ${PLATFORMS.join(", ")}.`);
+    });
+    d.socials[owner] = PLATFORMS.map((p) => ({ platform: p, url: httpsUrl(m[p], `socials.${owner}.${p}`, errors) }));
+  });
+
+  d.about_page = d.about_page || { title: "About", sections: [] };
+  d.about_page.sections = d.about_page.sections || [];
 
   if (/USERNAME|REPO/.test(d.site.url)) warnings.push("site.url still has USERNAME/REPO. Set the real GitHub address before printing cards.");
   if (JSON.stringify(d).includes("[PLACEHOLDER]") || d.founder.name.startsWith("[")) warnings.push("Placeholder text is still present in content/site.yaml.");
@@ -88,4 +91,4 @@ function validate(raw) {
   return d;
 }
 
-module.exports = { validate };
+module.exports = { validate, PLATFORMS };

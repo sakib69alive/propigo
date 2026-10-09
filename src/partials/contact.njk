@@ -1,0 +1,10 @@
+{# Call / WhatsApp / Email tiles. Dim and inert until a value is set in site.yaml. #}
+{% set c = site.contact %}
+<div class="ctiles">
+  {% if c.phone %}<a class="ctile" href="tel:{{ c.phone }}">{{ icons.phone | safe }}<span>Call</span></a>
+  {% else %}<span class="ctile off" aria-disabled="true">{{ icons.phone | safe }}<span>Call</span></span>{% endif %}
+  {% if c.whatsapp %}<a class="ctile" href="https://wa.me/{{ c.whatsapp_digits }}?text={{ c.whatsapp_message | encode }}" target="_blank" rel="noopener noreferrer">{{ icons.whatsapp | safe }}<span>WhatsApp</span></a>
+  {% else %}<span class="ctile off" aria-disabled="true">{{ icons.whatsapp | safe }}<span>WhatsApp</span></span>{% endif %}
+  {% if c.email %}<a class="ctile" href="mailto:{{ c.email }}">{{ icons.mail | safe }}<span>Email</span></a>
+  {% else %}<span class="ctile off" aria-disabled="true">{{ icons.mail | safe }}<span>Email</span></span>{% endif %}
+</div>

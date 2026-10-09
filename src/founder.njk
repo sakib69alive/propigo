@@ -1,0 +1,42 @@
+---
+permalink: founder/index.html
+canonicalPath: "founder/"
+pageTitle: "Founder — Propigo"
+pageDesc: "Meet the founder of Propigo."
+---
+{% extends "base.njk" %}
+{% block content %}
+<section class="hero sub-hero rise" aria-labelledby="h1">
+  <div class="portrait">
+    {% if site.founder.photo %}
+    <img src="{{ '/assets/founder.webp' | url }}" width="126" height="142" alt="Portrait of {{ site.founder.name }}" decoding="async" fetchpriority="high">
+    {% else %}
+    <i aria-hidden="true">{{ site.founder.initials }}</i>
+    {% endif %}
+  </div>
+  <span class="label">{{ site.founder.title }}, {{ site.company.name }}</span>
+  <h1 id="h1">{{ site.founder.name }}</h1>
+</section>
+
+<section class="panel-card rise d1" aria-labelledby="intro-h">
+  <span class="label">About the founder</span>
+  <h2 id="intro-h">Who is behind {{ site.company.name }}</h2>
+  {% if site.founder.intro %}<p>{{ site.founder.intro }}</p>{% endif %}
+</section>
+
+<section class="panel-card" aria-labelledby="say-h">
+  <span class="label">Founder's message</span>
+  <h2 id="say-h">In the founder's words</h2>
+  {% if site.founder.statement %}<p class="quote">{{ site.founder.statement }}</p>{% endif %}
+</section>
+
+<section class="panel-card" aria-labelledby="fc-h">
+  <span class="label">Connect</span>
+  <h2 id="fc-h">Connect with {{ site.founder.name }}</h2>
+  {% set socialList = site.socials.founder %}{% set socialWho = site.founder.name %}
+  {% include "socials.njk" %}
+  <a class="btn gold block" href="{{ '/propigo.vcf' | url }}" download="propigo-contact.vcf">{{ icons['user-plus'] | safe }}Save contact</a>
+</section>
+
+<p class="backrow"><a class="more" href="{{ '/' | url }}">{{ icons['arrow-left'] | safe }}Back to {{ site.company.name }}</a></p>
+{% endblock %}

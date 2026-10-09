@@ -1,24 +1,45 @@
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; background: var(--bg); }
 body {
   margin: 0;
   font-family: var(--font);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 450;
-  color: var(--slate);
-  background: var(--paper);
+  color: var(--muted);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
-h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.2; letter-spacing: -0.01em; font-weight: 700; }
+h1, h2, h3 { margin: 0; color: #fff; line-height: 1.2; letter-spacing: -0.01em; font-weight: 700; }
 p { margin: 0; }
-a { color: var(--blue); text-underline-offset: 3px; }
+a { color: var(--gold-l); text-underline-offset: 3px; }
 img, svg { display: block; max-width: 100%; }
 .ico { width: 20px; height: 20px; flex: none; }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: var(--s4); top: -64px; background: var(--ink); color: #fff; padding: var(--s3) var(--s4); border-radius: var(--r-chip); z-index: 20; }
+:focus-visible { outline: 3px solid var(--gold-l); outline-offset: 3px; border-radius: 8px; }
+.skip { position: absolute; left: var(--s4); top: -64px; background: var(--gold); color: var(--bg); padding: var(--s3) var(--s4); border-radius: var(--r-chip); z-index: 60; font-weight: 700; }
 .skip:focus { top: var(--s2); }
+
+/* ---------- Page background: layered, detailed, fixed behind everything ---------- */
+.bg {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(60% 38% at 50% 14%, rgba(70, 118, 214, 0.38), transparent 70%),
+    radial-gradient(45% 30% at 100% 46%, rgba(201, 161, 59, 0.16), transparent 70%),
+    radial-gradient(50% 34% at 0% 78%, rgba(44, 74, 126, 0.42), transparent 70%),
+    var(--bg-tile),
+    linear-gradient(180deg, #0a1f4a 0%, #071633 45%, #050f28 100%);
+  background-size: auto, auto, auto, 405px 585px, auto;
+  background-position: 0 0, 0 0, 0 0, center top, 0 0;
+}
+.bg::before, .bg::after { content: ""; position: absolute; inset: 0; }
+/* long isometric light beams echoing the logo's diagonals */
+.bg::before {
+  background:
+    linear-gradient(150deg, transparent 0 42%, rgba(125, 155, 214, 0.1) 42.2%, transparent 42.6% 58%, rgba(201, 161, 59, 0.12) 58.2%, transparent 58.5%),
+    linear-gradient(30deg, transparent 0 30%, rgba(125, 155, 214, 0.08) 30.2%, transparent 30.5% 70%, rgba(201, 161, 59, 0.1) 70.2%, transparent 70.4%);
+}
+/* vignette keeps text areas calm and focuses the eye */
+.bg::after { background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(3, 9, 24, 0.55) 100%); }
 
 /* Share / copy need JavaScript — hidden when it is off */
 .js-only { display: none !important; }
@@ -27,17 +48,19 @@ img, svg { display: block; max-width: 100%; }
 .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--s4); }
 
 .label {
+  display: block;
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold-ink);
+  color: var(--gold);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .rise { animation: rise 0.5s ease-out both; }
-  .rise.d1 { animation-delay: 0.06s; }
-  .rise.d2 { animation-delay: 0.12s; }
-  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .rise { animation: rise 0.55s ease-out both; }
+  .rise.d1 { animation-delay: 0.08s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .hero-art { animation: float 9s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-6px); } }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

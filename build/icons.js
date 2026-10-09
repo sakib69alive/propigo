@@ -22,7 +22,7 @@ function ui(name) {
 
 const icons = {};
 Object.keys(brandNames).forEach((s) => (icons[s] = brand(s)));
-["phone", "mail", "share-2", "copy", "download", "globe", "user-plus", "building-2", "car", "arrow-up", "check", "message-circle"].forEach(
+["arrow-right", "arrow-left", "handshake", "user", "phone", "mail", "share-2", "copy", "download", "globe", "user-plus", "building-2", "car", "arrow-up", "check", "message-circle"].forEach(
   (n) => (icons[n] = ui(n))
 );
 icons.building = icons["building-2"];

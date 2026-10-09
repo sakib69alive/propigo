@@ -26,7 +26,7 @@ function buildVcard(d, photoJpegBase64) {
   if (d.contact.phone) lines.push(`TEL;TYPE=CELL:${d.contact.phone}`);
   if (d.contact.whatsapp && d.contact.whatsapp !== d.contact.phone) lines.push(`TEL;TYPE=CELL:${d.contact.whatsapp}`);
   if (d.contact.email) lines.push(`EMAIL;TYPE=INTERNET:${d.contact.email}`);
-  lines.push(`URL:${d.contact.website || d.site.url}`);
+  lines.push(`URL:${d.site.url}`);
   if (photoJpegBase64) lines.push(`PHOTO;ENCODING=b;TYPE=JPEG:${photoJpegBase64}`);
   lines.push("END:VCARD");
   return lines.map(fold).join("\r\n") + "\r\n";

@@ -1,0 +1,42 @@
+---
+permalink: about/index.html
+canonicalPath: "about/"
+pageTitle: "About Propigo — what we do"
+pageDesc: "What Propigo is, what we do, who we work with and how to collaborate."
+---
+{% extends "base.njk" %}
+{% block content %}
+<section class="hero sub-hero rise" aria-labelledby="h1">
+  <span class="label">{{ site.company.kicker }}</span>
+  <h1 id="h1">{{ site.about_page.title }}</h1>
+  <p class="tagline">{{ site.about_page.intro }}</p>
+</section>
+
+{% for sec in site.about_page.sections %}
+<section class="panel-card rise" {% if sec.id %}id="{{ sec.id }}"{% endif %} aria-labelledby="s{{ loop.index }}">
+  <span class="label">0{{ loop.index }}</span>
+  <h2 id="s{{ loop.index }}">{{ sec.title }}</h2>
+  {% for p in sec.text %}<p>{{ p }}</p>{% endfor %}
+  {% if sec.points %}<ul class="points">{% for p in sec.points %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
+  {% if sec.id == "collaborate" %}
+  {% include "contact.njk" %}
+  <a class="btn gold block" style="margin-top:var(--s4)" href="{{ '/founder/' | url }}">{{ icons.user | safe }}Meet the founder</a>
+  {% endif %}
+</section>
+{% endfor %}
+
+{% if site.categories.length %}
+<section class="panel-card" aria-labelledby="promote-h">
+  <span class="label">Focus</span>
+  <h2 id="promote-h">What we promote</h2>
+  <div class="tiles">
+    {% for c in site.categories %}
+    <article class="tile"><span class="badge">{{ icons[c.icon] | safe }}</span><div><h3>{{ c.title }}</h3><p>{{ c.text }}</p></div></article>
+    {% endfor %}
+  </div>
+  {% if site.categories_note %}<p class="note">{{ site.categories_note }}</p>{% endif %}
+</section>
+{% endif %}
+
+<p class="backrow"><a class="more" href="{{ '/' | url }}">{{ icons['arrow-left'] | safe }}Back to {{ site.company.name }}</a></p>
+{% endblock %}

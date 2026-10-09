@@ -1,51 +1,58 @@
 ---
 permalink: index.html
+canonicalPath: ""
 ---
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>{{ site.site.title }}</title>
-  <meta name="description" content="{{ site.site.description }}">
-  <meta name="theme-color" content="#0b1f45">
-  <link rel="canonical" href="{{ site.site.url }}">
-  <link rel="icon" href="{{ '/favicon.svg' | url }}" type="image/svg+xml">
-  <link rel="icon" href="{{ '/favicon-32.png' | url }}" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | url }}">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="{{ site.company.name }}">
-  <meta property="og:title" content="{{ site.site.title }}">
-  <meta property="og:description" content="{{ site.site.description }}">
-  <meta property="og:url" content="{{ site.site.url }}">
-  <meta property="og:image" content="{{ site.site.url }}assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="preload" href="{{ '/assets/fonts/manrope.woff2' | url }}" as="font" type="font/woff2" crossorigin>
-  <style>
-    @font-face { font-family: "Manrope"; font-weight: 200 800; font-style: normal; font-display: swap; src: url("{{ '/assets/fonts/manrope.woff2' | url }}") format("woff2"); }
-    {{ css | safe }}
-  </style>
-</head>
-<body id="top">
-  <a class="skip" href="#main">Skip to content</a>
-  {# Logo is defined once and reused with <use> #}
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="logo" viewBox="{{ logoViewBox }}">{{ logoInner | safe }}</symbol></svg>
+{% extends "base.njk" %}
+{% block content %}
+<section class="hero rise" aria-labelledby="h1">
+  <div class="art">{{ heroArt | safe }}</div>
+  <span class="label">{{ site.company.kicker }}</span>
+  <h1 id="h1">{{ site.company.name }}</h1>
+  <p class="tagline">{{ site.company.tagline }}</p>
+  <a class="btn gold" href="{{ '/about/' | url }}">Read more about {{ site.company.name }}{{ icons['arrow-right'] | safe }}</a>
+</section>
 
-  {% include "header.njk" %}
-  <main id="main" class="wrap">
-    {% include "hero.njk" %}
-    {% include "qr.njk" %}
-    {% include "about.njk" %}
-    {% include "categories.njk" %}
-    {% include "founder.njk" %}
-    {% include "socials.njk" %}
-    {% include "cta.njk" %}
-  </main>
-  {% include "footer.njk" %}
+<section class="panel-card rise d1" aria-labelledby="about-h">
+  <span class="label">About</span>
+  <h2 id="about-h">What {{ site.company.name }} does</h2>
+  {% for line in site.company.about %}<p>{{ line }}</p>{% endfor %}
+  {% if site.categories.length %}
+  <div class="tiles">
+    {% for c in site.categories %}
+    <article class="tile">
+      <span class="badge">{{ icons[c.icon] | safe }}</span>
+      <div><h3>{{ c.title }}</h3><p>{{ c.text }}</p></div>
+    </article>
+    {% endfor %}
+  </div>
+  {% if site.categories_note %}<p class="note">{{ site.categories_note }}</p>{% endif %}
+  {% endif %}
+  <a class="more" href="{{ '/about/' | url }}">Read the full story{{ icons['arrow-right'] | safe }}</a>
+</section>
 
-  <div id="toast" role="status" aria-live="polite"></div>
-  <script>{{ js | safe }}</script>
-</body>
-</html>
+<section class="panel-card" aria-labelledby="contact-h" id="contact">
+  <span class="label">Contact</span>
+  <h2 id="contact-h">Get in touch with {{ site.company.name }}</h2>
+  {% include "contact.njk" %}
+  <h3 class="sub">Follow {{ site.company.name }}</h3>
+  {% set socialList = site.socials.company %}{% set socialWho = site.company.name %}
+  {% include "socials.njk" %}
+  <a class="btn alt block" href="{{ '/propigo.vcf' | url }}" download="propigo-contact.vcf">{{ icons['user-plus'] | safe }}Save contact</a>
+</section>
+
+<section class="cta" aria-labelledby="cta-h">
+  <span class="label">Collaborate</span>
+  <h2 id="cta-h">{{ site.cta.title }}</h2>
+  <p>{{ site.cta.text }}</p>
+  <div class="actions">
+    {% if site.contact.whatsapp %}
+    <a class="btn gold block" href="https://wa.me/{{ site.contact.whatsapp_digits }}?text={{ site.contact.whatsapp_message | encode }}" target="_blank" rel="noopener noreferrer">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
+    {% elif site.contact.email %}
+    <a class="btn gold block" href="mailto:{{ site.contact.email }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
+    {% else %}
+    <a class="btn gold block" href="{{ '/about/#collaborate' | url }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
+    {% endif %}
+    <a class="btn alt block" href="{{ '/founder/' | url }}">{{ icons.user | safe }}Meet the founder</a>
+  </div>
+</section>
+{% endblock %}

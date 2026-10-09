@@ -14,8 +14,10 @@ A fast, mobile-first bio page. All text lives in **one file: `content/site.yaml`
 
 ## 2. How to edit later / পরে কীভাবে এডিট করবেন
 GitHub → open `content/site.yaml` → pencil icon → edit → **Commit changes**. The site rebuilds in ~1–2 minutes.
-- Leave a field as `""` to hide it. Social accounts with an empty `url` are not shown.
+- Pages: home (`index`), full story (`about/`) and founder (`founder/`). The long "Read more" text is `about_page` in the yaml.
+- Call / WhatsApp / Email and every social icon stay visible but dim and not clickable until you fill them in. Paste a full `https://` link next to a platform under `socials:` to switch its icon on.
 - Phone: `01XXXXXXXXX` or `+8801XXXXXXXXX`. Links must start with `https://`.
+- The QR code opens from the share icon (top right of every page).
 - If you make a mistake the build **fails and the old version stays live**. See the red ✗ under the repo's **Actions** tab for the exact message.
 - **Founder photo:** put a square-ish photo (≥800×800) in `assets/`, e.g. `assets/founder.jpg`, and set `founder.photo: "founder.jpg"`. Without a photo an initials badge is shown.
 
@@ -37,6 +39,7 @@ npm install
 npm run build      # outputs _site/
 npm start          # local preview with auto-reload (served under the path of site.url)
 ```
+- Background art is generated in `build/art.js` (honeycomb tile + hero hexagon cluster); colours/spacing are in `src/styles/tokens.css`.
 - Stack: Eleventy 3 (static), zero client frameworks, ~2 KB inline JS (share/copy only). Page works with JS off.
 - `build/validate.js` checks the YAML and fails the build on errors; `build/post.js` writes the QR files, vCard, icons, OG image and font after each build.
 - Logo mark geometry: `assets/logo/logo-mark.svg` (traced from `assets/source/logo-original.png`, which is kept untouched).

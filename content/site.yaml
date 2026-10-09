@@ -1,7 +1,7 @@
 # =====================================================================
 #  PROPIGO CARD — ALL EDITABLE CONTENT LIVES IN THIS ONE FILE
 #  Edit text between the quotation marks "like this". Keep the spaces
-#  at the start of lines exactly as they are. Leave "" to hide a field.
+#  at the start of lines exactly as they are. Leave "" to hide/disable.
 #  Anything marked [PLACEHOLDER] must be replaced before printing cards.
 # =====================================================================
 
@@ -16,20 +16,14 @@ site:
   qr_target: "https://USERNAME.github.io/propigo/"
   year: "2026"            # shown in the footer: © 2026 Propigo
 
-founder:
-  name: "[Founder Name]"  # [PLACEHOLDER]
-  title: "Founder"
-  photo: ""               # file name inside assets/, e.g. "founder.jpg". Empty = initials badge
-  intro: "[PLACEHOLDER] A short introduction in the founder's own words: who you are and why you started Propigo."
-  statement: "[PLACEHOLDER] A sentence or two about how you like to work with partners and what a good collaboration looks like."
-
 company:
   name: "Propigo"
+  kicker: "Real Estate · Automotive"
   tagline: "Connecting property and automotive businesses with the people looking for them."
+  # Home page "About" text (one paragraph per line).
   about:
     - "Propigo is a business collaboration and promotional platform for real estate and automobiles."
     - "We work with developers, building owners and car dealers who want their properties and vehicles seen, by promoting them through Propigo's social and digital channels."
-    - "Propigo is not a developer, dealer or owner of the properties or vehicles it promotes."
 
 categories:
   - title: "Real Estate"
@@ -40,24 +34,67 @@ categories:
     text: "Cars, dealer listings and partner campaigns."
 categories_note: "Listings are promoted on behalf of our partners."
 
+# The full "Read more" page (about/). Each section: title, text (paragraphs), points (bullet list).
+about_page:
+  title: "About Propigo"
+  intro: "A closer look at who we are, what we do and how businesses can work with us."
+  sections:
+    - title: "What Propigo is"
+      text:
+        - "Propigo is a business collaboration and promotional platform for two industries: real estate and automobiles."
+        - "We help businesses in these industries get their properties and vehicles in front of more people, by promoting them through Propigo's social and digital channels."
+    - title: "What we do"
+      points:
+        - "Promote partner properties: buildings, flats, apartments and houses."
+        - "Promote partner vehicles: cars and dealer listings."
+        - "Run promotional campaigns on behalf of our partners."
+        - "Connect property and automotive businesses with the people looking for them."
+    - title: "Who we work with"
+      text:
+        - "Property developers, building owners and car dealers: businesses that have something to promote and want a collaboration partner to help it reach more people."
+    - title: "What Propigo is not"
+      text:
+        - "Propigo is not a developer, building owner or car dealer. We do not own or sell the properties or vehicles we promote. Every listing belongs to our partner and is promoted on their behalf."
+    - id: "collaborate"
+      title: "Collaborate with us"
+      text:
+        - "Have a property or vehicles you would like to promote? Get in touch and tell us what you have in mind."
+
+founder:
+  name: "[Founder Name]"  # [PLACEHOLDER]
+  title: "Founder"
+  photo: ""               # file name inside assets/, e.g. "founder.jpg". Empty = initials badge
+  intro: "[PLACEHOLDER] A short introduction in the founder's own words: who you are and why you started Propigo."
+  statement: "[PLACEHOLDER] A sentence or two about how you like to work with partners and what a good collaboration looks like."
+
 cta:
   title: "Promote your property or vehicles with Propigo"
   text: "Tell us what you would like to promote and we will get back to you."
 
 contact:
-  phone: ""               # e.g. 01XXXXXXXXX or +8801XXXXXXXXX — empty = hidden
-  whatsapp: ""            # same format — empty = hidden
+  phone: ""               # e.g. 01XXXXXXXXX or +8801XXXXXXXXX — empty = button stays dim
+  whatsapp: ""            # same format
   whatsapp_message: "Hi Propigo, I'd like to discuss a collaboration."
   email: ""
-  website: ""             # must start with https://
 
-# Social accounts. Add a line per account. Empty url = hidden.
-# owner: company (Propigo's page) or founder (personal profile)
-# platform: facebook, instagram, tiktok, youtube, linkedin, x, threads, telegram
+# Social accounts. Paste a full https:// link to switch an icon on.
+# Empty "" = the icon is shown but not clickable.
 socials:
-  - { owner: company, platform: facebook,  url: "" }
-  - { owner: company, platform: instagram, url: "" }
-  - { owner: company, platform: tiktok,    url: "" }
-  - { owner: company, platform: youtube,   url: "" }
-  - { owner: founder, platform: linkedin,  url: "" }
-  - { owner: founder, platform: facebook,  url: "" }
+  company:                # Propigo's own pages
+    youtube: ""
+    facebook: ""
+    instagram: ""
+    tiktok: ""
+    linkedin: ""
+    x: ""
+    threads: ""
+    telegram: ""
+  founder:                # the founder's personal profiles
+    youtube: ""
+    facebook: ""
+    instagram: ""
+    tiktok: ""
+    linkedin: ""
+    x: ""
+    threads: ""
+    telegram: ""

@@ -1,9 +1,11 @@
 (function () {
   document.documentElement.classList.add("js");
   var link = document.querySelector("link[rel=canonical]");
-  var url = link ? link.href : location.href;
+  // Always share the home page address (the card), never a sub-page
+  var url = link ? link.href.replace(/(about|founder)\/$/, "") : location.href;
   var toast = document.getElementById("toast");
-  var timer;
+  var sheet = document.getElementById("share");
+  var timer, opener;
 
   function say(msg) {
     toast.textContent = msg;
@@ -38,10 +40,29 @@
     }
   }
 
+  function openSheet(from) {
+    opener = from;
+    sheet.classList.add("open");
+    document.body.style.overflow = "hidden";
+    var b = sheet.querySelector(".btn.gold");
+    if (b) b.focus();
+  }
+  function closeSheet() {
+    sheet.classList.remove("open");
+    document.body.style.overflow = "";
+    if (opener) opener.focus();
+  }
+
   document.addEventListener("click", function (e) {
+    var o = e.target.closest("[data-open]");
+    if (o) { e.preventDefault(); return openSheet(o); }
+    if (e.target.closest("[data-close]")) { e.preventDefault(); return closeSheet(); }
     var b = e.target.closest("[data-action]");
     if (!b) return;
     if (b.dataset.action === "share") share();
     if (b.dataset.action === "copy") copy();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && sheet.classList.contains("open")) closeSheet();
   });
 })();

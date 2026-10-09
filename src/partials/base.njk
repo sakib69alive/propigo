@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ pageTitle or site.site.title }}</title>
+  <meta name="description" content="{{ pageDesc or site.site.description }}">
+  <meta name="theme-color" content="#071633">
+  <link rel="canonical" href="{{ site.site.url }}{{ canonicalPath }}">
+  <link rel="icon" href="{{ '/favicon.svg' | url }}" type="image/svg+xml">
+  <link rel="icon" href="{{ '/favicon-32.png' | url }}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.company.name }}">
+  <meta property="og:title" content="{{ pageTitle or site.site.title }}">
+  <meta property="og:description" content="{{ pageDesc or site.site.description }}">
+  <meta property="og:url" content="{{ site.site.url }}{{ canonicalPath }}">
+  <meta property="og:image" content="{{ site.site.url }}assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="{{ '/assets/fonts/manrope.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: "Manrope"; font-weight: 200 800; font-style: normal; font-display: swap; src: url("{{ '/assets/fonts/manrope.woff2' | url }}") format("woff2"); }
+    :root { --bg-tile: url("{{ '/assets/bg.svg' | url }}"); }
+    {{ css | safe }}
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  {# Logo defined once: dark-navy version for light surfaces, light version for the dark page #}
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="logo" viewBox="{{ logoViewBox }}">{{ logoInner | safe }}</symbol>
+    <symbol id="logo-l" viewBox="{{ logoViewBox }}">{{ logoLight | safe }}</symbol>
+  </svg>
+  <div class="bg" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="{{ '/' | url }}" aria-label="{{ site.company.name }} home">
+        <svg aria-hidden="true"><use href="#logo-l"/></svg>
+        <span>{{ site.company.name }}</span>
+      </a>
+      <a class="icon-btn" href="#share" data-open="share" aria-label="Share and QR code">{{ icons['share-2'] | safe }}</a>
+    </div>
+  </header>
+
+  <div class="sheet" id="share" role="dialog" aria-modal="true" aria-labelledby="share-h">
+    <a class="scrim" href="#top" data-close aria-label="Close"></a>
+    <div class="panel">
+      <h2 id="share-h">Share {{ site.company.name }}</h2>
+      <p>Scan the code with a phone camera to open this card.</p>
+      <div class="frame" role="img" aria-label="QR code that opens this page">{{ qrInline | safe }}</div>
+      <div class="row">
+        <button class="btn alt js-only" type="button" data-action="share">{{ icons['share-2'] | safe }}Share</button>
+        <button class="btn alt js-only" type="button" data-action="copy">{{ icons.copy | safe }}Copy link</button>
+        <a class="btn alt" href="{{ '/qr/propigo-qr.png' | url }}" download="propigo-qr.png">{{ icons.download | safe }}Download QR</a>
+      </div>
+      <a class="btn gold block" href="#top" data-close>Close</a>
+    </div>
+  </div>
+
+  <main id="main" class="wrap">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="foot">
+    <svg class="mark" aria-hidden="true"><use href="#logo-l"/></svg>
+    <p>© {{ site.site.year }} {{ site.company.name }}</p>
+    <a class="up" href="#top">{{ icons['arrow-up'] | safe }}Back to top</a>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script>{{ js | safe }}</script>
+</body>
+</html>
