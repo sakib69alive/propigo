@@ -8,12 +8,12 @@
 site:
   # The permanent address of this site (GitHub Pages). Ends with a "/".
   # [PLACEHOLDER] replace USERNAME and REPO after you create the GitHub repo.
-  url: "https://USERNAME.github.io/propigo/"
+  url: "https://sakib69alive.github.io/propigo/"
   title: "Propigo — Real Estate & Automotive Promotion"
   description: "Propigo connects property and automotive businesses with the people looking for them."
   # Where the permanent QR/NFC address (<url>c/) sends visitors. Normally
   # the home page. Change ONLY this line if the destination ever moves.
-  qr_target: "https://USERNAME.github.io/propigo/"
+  qr_target: "https://sakib69alive.github.io/propigo/"
   year: "2026"            # shown in the footer: © 2026 Propigo
 
 company:
