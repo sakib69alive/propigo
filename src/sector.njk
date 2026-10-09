@@ -1,0 +1,66 @@
+---
+pagination:
+  data: site.categories
+  size: 1
+  alias: cat
+permalink: "{{ cat.slug }}/index.html"
+eleventyComputed:
+  pageTitle: "{{ cat.title }} — Propigo"
+  pageDesc: "{{ cat.intro }}"
+  canonicalPath: "{{ cat.slug }}/"
+---
+{% extends "base.njk" %}
+{% block content %}
+<section class="hero sub-hero rise" aria-labelledby="h1">
+  <div class="medal" aria-hidden="true">{{ icons[cat.icon] | safe }}</div>
+  <span class="label">{{ cat.title }}</span>
+  <h1 id="h1">{{ cat.headline or cat.title }}</h1>
+  <p class="tagline">{{ cat.intro }}</p>
+</section>
+
+{% if cat.points.length %}
+<section class="panel-card rise d1" aria-labelledby="do-h">
+  <span class="label">What we do</span>
+  <h2 id="do-h">Our work in {{ cat.title | lower }}</h2>
+  <ul class="points">{% for p in cat.points %}<li>{{ p }}</li>{% endfor %}</ul>
+  {% if site.categories_note %}<p class="note">{{ site.categories_note }}</p>{% endif %}
+</section>
+{% endif %}
+
+<section class="panel-card" aria-labelledby="pt-h">
+  <span class="label">Partners</span>
+  <h2 id="pt-h">Who we work with</h2>
+  <p>Businesses in {{ cat.title | lower }} that collaborate with {{ site.company.name }}.</p>
+  <div class="partners">
+    {% for p in cat.partners %}
+    <article class="partner">
+      <span class="mono">{{ p.initials }}</span>
+      <div class="pbody">
+        <h3>{{ p.name }}</h3>
+        {% if p.note %}<p>{{ p.note }}</p>{% endif %}
+      </div>
+      {% if p.url %}<a class="visit" href="{{ p.url }}" target="_blank" rel="noopener noreferrer" aria-label="Visit {{ p.name }} website">Visit website{{ icons['external-link'] | safe }}</a>{% endif %}
+    </article>
+    {% else %}
+    <article class="partner ghost" aria-label="Partner slot">
+      <span class="mono">··</span>
+      <div class="pbody"><h3>Partner name</h3><p>Our {{ cat.title | lower }} partners will be listed here with a link to their website.</p></div>
+    </article>
+    <article class="partner ghost" aria-hidden="true"><span class="mono">··</span><div class="pbody"><h3>Partner name</h3><p>Website link</p></div></article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="cta" aria-labelledby="cta-h">
+  <span class="label">Collaborate</span>
+  <h2 id="cta-h">Promote your {{ 'property' if cat.icon == 'building' else 'vehicles' }} with {{ site.company.name }}</h2>
+  <p>{{ site.cta.text }}</p>
+  <div class="actions">
+    {% if site.contact.whatsapp %}<a class="btn gold block" href="https://wa.me/{{ site.contact.whatsapp_digits }}?text={{ site.contact.whatsapp_message | encode }}" target="_blank" rel="noopener noreferrer">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
+    {% elif site.contact.email %}<a class="btn gold block" href="mailto:{{ site.contact.email }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
+    {% else %}<a class="btn gold block" href="{{ '/about/#collaborate' | url }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>{% endif %}
+  </div>
+</section>
+
+<p class="backrow"><a class="more" href="{{ '/' | url }}">{{ icons['arrow-left'] | safe }}Back to {{ site.company.name }}</a></p>
+{% endblock %}

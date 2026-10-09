@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{{ pageTitle or site.site.title }}</title>
   <meta name="description" content="{{ pageDesc or site.site.description }}">
-  <meta name="theme-color" content="#071633">
+  <meta name="theme-color" content="{{ '#f7f5f0' if bodyClass == 'light' else '#071633' }}">
   <link rel="canonical" href="{{ site.site.url }}{{ canonicalPath }}">
   <link rel="icon" href="{{ '/favicon.svg' | url }}" type="image/svg+xml">
   <link rel="icon" href="{{ '/favicon-32.png' | url }}" sizes="32x32" type="image/png">
@@ -25,7 +25,7 @@
     {{ css | safe }}
   </style>
 </head>
-<body id="top">
+<body id="top"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
   <a class="skip" href="#main">Skip to content</a>
   {# Logo defined once: dark-navy version for light surfaces, light version for the dark page #}
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -34,15 +34,7 @@
   </svg>
   <div class="bg" aria-hidden="true"></div>
 
-  <header class="top">
-    <div class="wrap">
-      <a class="brand" href="{{ '/' | url }}" aria-label="{{ site.company.name }} home">
-        <svg aria-hidden="true"><use href="#logo-l"/></svg>
-        <span>{{ site.company.name }}</span>
-      </a>
-      <a class="icon-btn" href="#share" data-open="share" aria-label="Share and QR code">{{ icons['share-2'] | safe }}</a>
-    </div>
-  </header>
+  <a class="share-fab" href="#share" data-open="share" aria-label="Share and QR code">{{ icons['share-2'] | safe }}</a>
 
   <div class="sheet" id="share" role="dialog" aria-modal="true" aria-labelledby="share-h">
     <a class="scrim" href="#top" data-close aria-label="Close"></a>
@@ -64,7 +56,7 @@
   </main>
 
   <footer class="foot">
-    <svg class="mark" aria-hidden="true"><use href="#logo-l"/></svg>
+    <svg class="mark" aria-hidden="true"><use href="{{ '#logo' if bodyClass == 'light' else '#logo-l' }}"/></svg>
     <p>© {{ site.site.year }} {{ site.company.name }}</p>
     <a class="up" href="#top">{{ icons['arrow-up'] | safe }}Back to top</a>
   </footer>

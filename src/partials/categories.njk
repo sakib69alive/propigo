@@ -1,10 +1,11 @@
 <div class="tiles">
   {% for c in site.categories %}
-  <article class="tile">
+  <article class="tile" id="{{ c.slug }}">
     <span class="wm" aria-hidden="true">{{ icons[c.icon] | safe }}</span>
     <span class="badge">{{ icons[c.icon] | safe }}</span>
     <h3>{{ c.title }}</h3>
     <p>{{ c.text }}</p>
+    <a class="more" href="{{ ('/' + c.slug + '/') | url }}">Read more{{ icons['arrow-right'] | safe }}</a>
   </article>
   {% endfor %}
 </div>

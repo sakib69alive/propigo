@@ -56,6 +56,14 @@ function validate(raw) {
   d.categories = Array.isArray(d.categories) ? d.categories : [];
   d.categories.forEach((c, i) => {
     need(`categories[${i}].title`, c.title);
+    c.slug = String(c.slug || String(c.title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-")).replace(/^-|-$/g, "");
+    c.points = c.points || [];
+    c.partners = (c.partners || []).filter((p) => p && p.name).map((p, j) => ({
+      name: String(p.name),
+      note: String(p.note || ""),
+      initials: String(p.name).split(/\s+/).slice(0, 2).map((w) => w[0].toUpperCase()).join(""),
+      url: httpsUrl(p.url, `categories[${i}].partners[${j}].url`, errors),
+    }));
     if (!["building", "car"].includes(c.icon)) errors.push(`categories[${i}].icon must be "building" or "car".`);
   });
 

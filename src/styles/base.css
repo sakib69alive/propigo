@@ -20,16 +20,7 @@ img, svg { display: block; max-width: 100%; }
 .skip:focus { top: var(--s2); }
 
 /* ---------- Page background: layered, detailed, fixed behind everything ---------- */
-.bg {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.07) 1px, transparent 1.5px) 0 0 / 24px 24px,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 800' preserveAspectRatio='xMaxYMax slice'%3E%3Cg fill='none' stroke='%23c9a13b' stroke-opacity='.2'%3E%3Ccircle cx='400' cy='800' r='150'/%3E%3Ccircle cx='400' cy='800' r='230'/%3E%3Ccircle cx='400' cy='800' r='320' stroke-opacity='.12'/%3E%3Ccircle cx='400' cy='800' r='430' stroke-opacity='.08'/%3E%3Ccircle cx='400' cy='800' r='560' stroke-opacity='.06'/%3E%3C/g%3E%3Cg fill='none' stroke='%237d9bd6' stroke-opacity='.16'%3E%3Ccircle cx='0' cy='0' r='130'/%3E%3Ccircle cx='0' cy='0' r='210' stroke-opacity='.1'/%3E%3Ccircle cx='0' cy='0' r='310' stroke-opacity='.07'/%3E%3Ccircle cx='0' cy='0' r='430' stroke-opacity='.05'/%3E%3C/g%3E%3C/svg%3E") right bottom / cover no-repeat,
-    radial-gradient(75% 46% at 50% 0%, rgba(74, 125, 224, 0.5), transparent 72%),
-    radial-gradient(55% 38% at 108% 52%, rgba(201, 161, 59, 0.2), transparent 70%),
-    radial-gradient(62% 40% at -12% 86%, rgba(44, 74, 126, 0.6), transparent 70%),
-    linear-gradient(180deg, #0b2150 0%, #071633 48%, #040c22 100%);
-}
+.bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #071633; }
 
 /* Share / copy need JavaScript — hidden when it is off */
 .js-only { display: none !important; }

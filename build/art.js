@@ -11,7 +11,7 @@ function rng(seed) {
   };
 }
 
-const W = 360, H = 300, BASE = 300;
+const W = 360, H = 250, BASE = 250;
 
 function skyline(seed, o) {
   const rand = rng(seed);
@@ -39,9 +39,9 @@ function skyline(seed, o) {
 }
 
 function heroArt() {
-  const back = skyline(11, { minW: 12, maxW: 26, minH: 60, maxH: 135, windows: 0.12, spires: true });
-  const mid = skyline(23, { minW: 14, maxW: 30, minH: 40, maxH: 100, windows: 0.3, spires: false });
-  const front = skyline(37, { minW: 18, maxW: 38, minH: 18, maxH: 66, windows: 0.4, spires: false });
+  const back = skyline(11, { minW: 12, maxW: 26, minH: 26, maxH: 56, windows: 0.12, spires: true });
+  const mid = skyline(23, { minW: 14, maxW: 30, minH: 18, maxH: 42, windows: 0.3, spires: false });
+  const front = skyline(37, { minW: 18, maxW: 38, minH: 8, maxH: 28, windows: 0.4, spires: false });
   return (
     `<svg class="hero-art" viewBox="0 0 ${W} ${H}" role="img" aria-label="Propigo mark above a city skyline">` +
     `<defs>` +
@@ -52,19 +52,19 @@ function heroArt() {
     `<linearGradient id="ha-trail" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e6b741" stop-opacity="0"/><stop offset=".5" stop-color="#f1c85a"/><stop offset="1" stop-color="#e6b741" stop-opacity="0"/></linearGradient>` +
     `</defs>` +
     // halo + rings behind the mark
-    `<circle cx="180" cy="104" r="118" fill="url(#ha-glow)"/>` +
-    `<circle cx="180" cy="104" r="62" fill="none" stroke="#c9a13b" stroke-opacity=".55" stroke-width="1"/>` +
-    `<circle cx="180" cy="104" r="84" fill="none" stroke="#7d9bd6" stroke-opacity=".35" stroke-width="1" stroke-dasharray="2 5"/>` +
-    `<circle cx="180" cy="104" r="106" fill="none" stroke="#c9a13b" stroke-opacity=".22" stroke-width="1"/>` +
-    `<circle cx="180" cy="104" r="40" fill="#071633" fill-opacity=".85"/>` +
-    `<svg x="157" y="76" width="46" height="56" aria-hidden="true"><use href="#logo-l" width="46" height="56"/></svg>` +
+    `<circle cx="180" cy="80" r="80" fill="url(#ha-glow)"/>` +
+    `<circle cx="180" cy="80" r="42" fill="none" stroke="#c9a13b" stroke-opacity=".55" stroke-width="1"/>` +
+    `<circle cx="180" cy="80" r="56" fill="none" stroke="#7d9bd6" stroke-opacity=".35" stroke-width="1" stroke-dasharray="2 5"/>` +
+    `<circle cx="180" cy="80" r="70" fill="none" stroke="#c9a13b" stroke-opacity=".22" stroke-width="1"/>` +
+    `<circle cx="180" cy="80" r="30" fill="#071633" fill-opacity=".85"/>` +
+    `<svg x="164" y="59" width="32" height="42" aria-hidden="true"><use href="#logo-l" width="32" height="42"/></svg>` +
     // skyline layers
     `<g fill="url(#ha-back)" opacity=".7">${back.rects}</g><path d="${back.spires}" stroke="#7d9bd6" stroke-opacity=".5" stroke-width="1" fill="none"/>${back.wsvg}` +
     `<g fill="url(#ha-mid)" opacity=".92">${mid.rects}</g>${mid.wsvg}` +
     `<g fill="url(#ha-front)">${front.rects}</g>${front.wsvg}` +
     // light trails (road / motion)
-    `<path d="M-10 292 Q180 238 370 286" fill="none" stroke="url(#ha-trail)" stroke-width="2.2"/>` +
-    `<path d="M-10 298 Q180 250 370 296" fill="none" stroke="url(#ha-trail)" stroke-width="1" stroke-opacity=".7"/>` +
+    `<path d="M-10 244 Q180 214 370 240" fill="none" stroke="url(#ha-trail)" stroke-width="2.2"/>` +
+    `<path d="M-10 249 Q180 222 370 247" fill="none" stroke="url(#ha-trail)" stroke-width="1" stroke-opacity=".7"/>` +
     `</svg>`
   );
 }

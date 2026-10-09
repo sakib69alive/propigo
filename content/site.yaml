@@ -36,13 +36,32 @@ how:
     - title: "People"
       text: "People looking for a property or a vehicle discover what our partners offer."
 
+# The two sectors. Each has its own "Read more" page (/real-estate/ and /automotive/).
+# partners: add one line per partner company, e.g.
+#   - { name: "Company Name", url: "https://company.com/", note: "What they do (optional)" }
 categories:
   - title: "Real Estate"
+    slug: "real-estate"
     icon: "building"      # building or car
     text: "Buildings, flats, apartments, houses and partner campaigns."
+    headline: "Property, promoted properly."
+    intro: "We promote partner properties (buildings, flats, apartments and houses) through Propigo's social and digital channels."
+    points:
+      - "Promote buildings, flats, apartments and houses for our partners."
+      - "Run partner campaigns across our social and digital channels."
+      - "Connect property businesses with the people looking for a place."
+    partners: []
   - title: "Automotive"
+    slug: "automotive"
     icon: "car"
     text: "Cars, dealer listings and partner campaigns."
+    headline: "Vehicles, in front of the right people."
+    intro: "We promote partner vehicles and dealer listings through Propigo's social and digital channels."
+    points:
+      - "Promote cars and dealer listings for our partners."
+      - "Run partner campaigns across our social and digital channels."
+      - "Connect automotive businesses with the people looking for a vehicle."
+    partners: []
 categories_note: "Listings are promoted on behalf of our partners."
 
 # The full "Read more" page (about/). Each section: title, text (paragraphs), points (bullet list).
