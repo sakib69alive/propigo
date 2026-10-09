@@ -67,6 +67,9 @@ async function post(site, outDir) {
   const fontSrc = path.join(root, "node_modules", "@fontsource-variable", "manrope", "files", "manrope-latin-wght-normal.woff2");
   write("assets/fonts/manrope.woff2", fs.readFileSync(fontSrc));
 
+  const corm = path.join(root, "node_modules", "@fontsource", "cormorant-garamond", "files");
+  write("assets/fonts/cormorant-500.woff2", fs.readFileSync(path.join(corm, "cormorant-garamond-latin-500-normal.woff2")));
+  write("assets/fonts/cormorant-400i.woff2", fs.readFileSync(path.join(corm, "cormorant-garamond-latin-400-italic.woff2")));
   write("robots.txt", "User-agent: *\nAllow: /\n");
 }
 
