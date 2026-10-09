@@ -91,7 +91,7 @@ about_page:
         - "Have a property or vehicles you would like to promote? Get in touch and tell us what you have in mind."
 
 founder:
-  name: "[Founder Name]"  # [PLACEHOLDER]
+  name: "Sakib Al Hasan"
   title: "Founder"
   photo: ""               # file name inside assets/, e.g. "founder.jpg". Empty = initials badge
   intro: "[PLACEHOLDER] A short introduction in the founder's own words: who you are and why you started Propigo."
