@@ -286,3 +286,5 @@ a.soc:hover { background: var(--gold); color: #06122c; }
 @media (max-height: 640px) { .hero.home .art { width: 110px; } .hero.home h1 { font-size: 3rem; } }
 
 .hero.home::after { opacity: 0.5; }
+
+.hero.home .label { margin-top: 40px; }
