@@ -125,4 +125,19 @@
     window.addEventListener("touchend", function () { touching = false; clearTimeout(idle); idle = setTimeout(settle, 140); }, { passive: true });
     window.addEventListener("wheel", stop, { passive: true });
   }
+
+  // Page-to-page fade for browsers without native view transitions
+  if (!document.startViewTransition && !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest("a[href]");
+      if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      if (a.target || a.hasAttribute("download") || a.hasAttribute("data-open") || a.hasAttribute("data-close")) return;
+      var u = new URL(a.href, location.href);
+      if (u.origin !== location.origin || (u.pathname === location.pathname && u.hash)) return;
+      e.preventDefault();
+      document.body.classList.add("leaving");
+      setTimeout(function () { location.href = a.href; }, 240);
+    });
+    window.addEventListener("pageshow", function (e) { if (e.persisted) document.body.classList.remove("leaving"); });
+  }
 })();
