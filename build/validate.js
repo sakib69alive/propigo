@@ -59,6 +59,9 @@ function validate(raw) {
     if (!["building", "car"].includes(c.icon)) errors.push(`categories[${i}].icon must be "building" or "car".`);
   });
 
+  d.how = d.how || { title: "How it works", steps: [] };
+  d.how.steps = d.how.steps || [];
+
   d.cta = d.cta || {};
   d.contact = d.contact || {};
   const c = d.contact;

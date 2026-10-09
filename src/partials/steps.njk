@@ -1,0 +1,7 @@
+{% if site.how.steps.length %}
+<ol class="steps" aria-label="{{ site.how.title }}">
+  {% for s in site.how.steps %}
+  <li><span class="num" aria-hidden="true">{{ loop.index }}</span><div><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div></li>
+  {% endfor %}
+</ol>
+{% endif %}

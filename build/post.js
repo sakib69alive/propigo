@@ -5,7 +5,7 @@ const sharp = require("sharp");
 const { qrSvg, qrPng } = require("./qr");
 const { buildVcard } = require("./vcard");
 const { markSvg } = require("./logo-svg");
-const { bgTile } = require("./art");
+
 
 const root = path.join(__dirname, "..");
 const BG = { r: 247, g: 245, b: 240, alpha: 1 }; // warm off-white
@@ -67,7 +67,6 @@ async function post(site, outDir) {
   const fontSrc = path.join(root, "node_modules", "@fontsource-variable", "manrope", "files", "manrope-latin-wght-normal.woff2");
   write("assets/fonts/manrope.woff2", fs.readFileSync(fontSrc));
 
-  write("assets/bg.svg", bgTile());
   write("robots.txt", "User-agent: *\nAllow: /\n");
 }
 

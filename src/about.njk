@@ -12,31 +12,40 @@ pageDesc: "What Propigo is, what we do, who we work with and how to collaborate.
   <p class="tagline">{{ site.about_page.intro }}</p>
 </section>
 
-{% for sec in site.about_page.sections %}
-<section class="panel-card rise" {% if sec.id %}id="{{ sec.id }}"{% endif %} aria-labelledby="s{{ loop.index }}">
+{% for sec in site.about_page.sections %}{% if sec.id != "collaborate" %}
+<section class="panel-card rise" aria-labelledby="s{{ loop.index }}">
   <span class="label">0{{ loop.index }}</span>
   <h2 id="s{{ loop.index }}">{{ sec.title }}</h2>
-  {% for p in sec.text %}<p>{{ p }}</p>{% endfor %}
+  {% for p in sec.text %}<p{% if loop.first and sec.text.length > 1 %} class="lead"{% endif %}>{{ p }}</p>{% endfor %}
   {% if sec.points %}<ul class="points">{% for p in sec.points %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
-  {% if sec.id == "collaborate" %}
-  {% include "contact.njk" %}
-  <a class="btn gold block" style="margin-top:var(--s4)" href="{{ '/founder/' | url }}">{{ icons.user | safe }}Meet the founder</a>
-  {% endif %}
 </section>
-{% endfor %}
+{% endif %}{% endfor %}
+
+{% if site.how.steps.length %}
+<section class="panel-card" aria-labelledby="how-h">
+  <span class="label">Process</span>
+  <h2 id="how-h">{{ site.how.title }}</h2>
+  {% include "steps.njk" %}
+</section>
+{% endif %}
 
 {% if site.categories.length %}
 <section class="panel-card" aria-labelledby="promote-h">
   <span class="label">Focus</span>
   <h2 id="promote-h">What we promote</h2>
-  <div class="tiles">
-    {% for c in site.categories %}
-    <article class="tile"><span class="badge">{{ icons[c.icon] | safe }}</span><div><h3>{{ c.title }}</h3><p>{{ c.text }}</p></div></article>
-    {% endfor %}
-  </div>
-  {% if site.categories_note %}<p class="note">{{ site.categories_note }}</p>{% endif %}
+  {% include "categories.njk" %}
 </section>
 {% endif %}
+
+{% for sec in site.about_page.sections %}{% if sec.id == "collaborate" %}
+<section class="panel-card" id="collaborate" aria-labelledby="collab-h">
+  <span class="label">Collaborate</span>
+  <h2 id="collab-h">{{ sec.title }}</h2>
+  {% for p in sec.text %}<p>{{ p }}</p>{% endfor %}
+  {% include "contact.njk" %}
+  <a class="btn gold block" style="margin-top:var(--s4)" href="{{ '/founder/' | url }}">{{ icons.user | safe }}Meet the founder</a>
+</section>
+{% endif %}{% endfor %}
 
 <p class="backrow"><a class="more" href="{{ '/' | url }}">{{ icons['arrow-left'] | safe }}Back to {{ site.company.name }}</a></p>
 {% endblock %}

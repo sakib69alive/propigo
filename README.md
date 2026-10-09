@@ -39,7 +39,7 @@ npm install
 npm run build      # outputs _site/
 npm start          # local preview with auto-reload (served under the path of site.url)
 ```
-- Background art is generated in `build/art.js` (honeycomb tile + hero hexagon cluster); colours/spacing are in `src/styles/tokens.css`.
+- Hero art (halo + skyline) is generated in `build/art.js`; the page background is pure CSS in `src/styles/base.css`; colours/spacing are in `src/styles/tokens.css`.
 - Stack: Eleventy 3 (static), zero client frameworks, ~2 KB inline JS (share/copy only). Page works with JS off.
 - `build/validate.js` checks the YAML and fails the build on errors; `build/post.js` writes the QR files, vCard, icons, OG image and font after each build.
 - Logo mark geometry: `assets/logo/logo-mark.svg` (traced from `assets/source/logo-original.png`, which is kept untouched).

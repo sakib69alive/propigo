@@ -13,19 +13,13 @@ canonicalPath: ""
 </section>
 
 <section class="panel-card rise d1" aria-labelledby="about-h">
-  <span class="label">About</span>
+  <span class="label">What we do</span>
   <h2 id="about-h">What {{ site.company.name }} does</h2>
-  {% for line in site.company.about %}<p>{{ line }}</p>{% endfor %}
+  {% for line in site.company.about %}<p{% if loop.first %} class="lead"{% endif %}>{{ line }}</p>{% endfor %}
+  {% include "steps.njk" %}
   {% if site.categories.length %}
-  <div class="tiles">
-    {% for c in site.categories %}
-    <article class="tile">
-      <span class="badge">{{ icons[c.icon] | safe }}</span>
-      <div><h3>{{ c.title }}</h3><p>{{ c.text }}</p></div>
-    </article>
-    {% endfor %}
-  </div>
-  {% if site.categories_note %}<p class="note">{{ site.categories_note }}</p>{% endif %}
+  <span class="label sub-label">What we promote</span>
+  {% include "categories.njk" %}
   {% endif %}
   <a class="more" href="{{ '/about/' | url }}">Read the full story{{ icons['arrow-right'] | safe }}</a>
 </section>

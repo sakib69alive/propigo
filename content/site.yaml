@@ -25,6 +25,17 @@ company:
     - "Propigo is a business collaboration and promotional platform for real estate and automobiles."
     - "We work with developers, building owners and car dealers who want their properties and vehicles seen, by promoting them through Propigo's social and digital channels."
 
+# "How it works" timeline shown on the home and about pages.
+how:
+  title: "How it works"
+  steps:
+    - title: "Partners"
+      text: "Developers, building owners and car dealers who have something to promote."
+    - title: "Propigo"
+      text: "We promote their properties and vehicles through our social and digital channels."
+    - title: "People"
+      text: "People looking for a property or a vehicle discover what our partners offer."
+
 categories:
   - title: "Real Estate"
     icon: "building"      # building or car

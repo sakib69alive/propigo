@@ -1,0 +1,11 @@
+<div class="tiles">
+  {% for c in site.categories %}
+  <article class="tile">
+    <span class="wm" aria-hidden="true">{{ icons[c.icon] | safe }}</span>
+    <span class="badge">{{ icons[c.icon] | safe }}</span>
+    <h3>{{ c.title }}</h3>
+    <p>{{ c.text }}</p>
+  </article>
+  {% endfor %}
+</div>
+{% if site.categories_note %}<p class="note">{{ site.categories_note }}</p>{% endif %}
