@@ -1,0 +1,18 @@
+{% if site.categories.length %}
+<section class="section" aria-labelledby="promote-h">
+  <span class="label">What we promote</span>
+  <h2 id="promote-h">Two industries, one platform</h2>
+  <div class="tiles">
+    {% for c in site.categories %}
+    <article class="tile">
+      <span class="badge">{{ icons[c.icon] | safe }}</span>
+      <div>
+        <h3>{{ c.title }}</h3>
+        <p>{{ c.text }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% if site.categories_note %}<p class="note">{{ site.categories_note }}</p>{% endif %}
+</section>
+{% endif %}

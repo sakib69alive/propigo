@@ -1,0 +1,19 @@
+---
+permalink: c/index.html
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.company.name }}</title>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url={{ site.site.qr_target }}">
+  <link rel="canonical" href="{{ site.site.qr_target }}">
+  <script>location.replace({{ site.site.qr_target | dump | safe }});</script>
+  <style>body{font:16px/1.6 system-ui,sans-serif;background:#f7f5f0;color:#0b1f45;display:grid;place-items:center;min-height:100vh;margin:0;text-align:center}a{color:#2c4a7e;font-weight:700}</style>
+</head>
+<body>
+  <p>Opening {{ site.company.name }}…<br><a href="{{ site.site.qr_target }}">Tap here if nothing happens</a></p>
+</body>
+</html>

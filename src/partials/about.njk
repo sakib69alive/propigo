@@ -1,0 +1,5 @@
+<section class="section" aria-labelledby="about-h">
+  <span class="label">About</span>
+  <h2 id="about-h">About {{ site.company.name }}</h2>
+  {% for line in site.company.about %}<p>{{ line }}</p>{% endfor %}
+</section>

@@ -1,0 +1,17 @@
+<section class="cta" aria-labelledby="cta-h">
+  <span class="label">Collaborate</span>
+  <h2 id="cta-h">{{ site.cta.title }}</h2>
+  <p>{{ site.cta.text }}</p>
+  {% set c = site.contact %}
+  {% if c.whatsapp or c.email or c.website %}
+  <div class="actions">
+    {% if c.whatsapp %}<a class="btn block" href="https://wa.me/{{ c.whatsapp_digits }}?text={{ c.whatsapp_message | encode }}" target="_blank" rel="noopener noreferrer">{{ icons.whatsapp | safe }}Message on WhatsApp</a>{% endif %}
+    {% if c.email or c.website %}
+    <div class="pair">
+      {% if c.email %}<a class="btn alt" href="mailto:{{ c.email }}">{{ icons.mail | safe }}Email</a>{% endif %}
+      {% if c.website %}<a class="btn alt" href="{{ c.website }}" target="_blank" rel="noopener noreferrer">{{ icons.globe | safe }}Website</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>

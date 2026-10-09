@@ -1,0 +1,10 @@
+<section class="card qr rise d1 section" style="margin-top: var(--s4)" aria-labelledby="qr-h">
+  <h2 id="qr-h">Scan to open this card</h2>
+  <p class="hint">Point a phone camera at the code to save my details.</p>
+  <div class="frame" role="img" aria-label="QR code that opens this page">{{ qrInline | safe }}</div>
+  <div class="row">
+    <button class="btn alt js-only" type="button" data-action="share">{{ icons['share-2'] | safe }}Share</button>
+    <button class="btn alt js-only" type="button" data-action="copy">{{ icons.copy | safe }}Copy link</button>
+    <a class="btn alt" href="{{ '/qr/propigo-qr.png' | url }}" download="propigo-qr.png">{{ icons.download | safe }}QR image</a>
+  </div>
+</section>

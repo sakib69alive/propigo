@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="334 102 548 660" width="548" height="660">
+  <defs>
+    <linearGradient id="pg-fade" gradientUnits="userSpaceOnUse" x1="650" y1="0" x2="850" y2="0">
+      <stop offset="0" stop-color="#002047"/>
+      <stop offset="1" stop-color="#D2A02A"/>
+    </linearGradient>
+    <linearGradient id="pg-gold" gradientUnits="userSpaceOnUse" x1="552" y1="0" x2="878" y2="0">
+      <stop offset="0" stop-color="#BB8002"/>
+      <stop offset="0.55" stop-color="#E6B741"/>
+      <stop offset="1" stop-color="#CE950A"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#pg-fade)" d="M608 106 878 266V340L865 344 608 191 411 308V641L338 598V266Z"/>
+  <path fill="#002047" d="M608 272 730 344 659 387 608 356 552 389V724L478 682V348Z"/>
+  <path fill="url(#pg-gold)" d="M552 640 608 672 804 556V468L620 578V490L865 344 878 340V598L608 758 552 724Z"/>
+</svg>

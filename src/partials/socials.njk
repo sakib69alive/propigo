@@ -1,0 +1,19 @@
+{% if site.socials.length %}
+<section class="section" aria-labelledby="connect-h">
+  <span class="label">Connect</span>
+  <h2 id="connect-h">Follow and connect</h2>
+  {% for owner, heading in { company: site.company.name, founder: site.founder.name } %}
+    {% set list = site.socials | socialsFor(owner) %}
+    {% if list.length %}
+    <div class="group">
+      <h3>{{ heading }}</h3>
+      <div class="chips">
+        {% for s in list %}
+        <a class="chip" href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ heading }} on {{ brandNames[s.platform] }}">{{ icons[s.platform] | safe }}{{ brandNames[s.platform] }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+</section>
+{% endif %}

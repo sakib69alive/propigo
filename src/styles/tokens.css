@@ -1,0 +1,20 @@
+:root {
+  --ink: #0b1f45;          /* headings, primary buttons, QR modules */
+  --deep: #071633;         /* footer / CTA block */
+  --slate: #566780;        /* body text, captions (AA on off-white) */
+  --hair: #e4e2dc;         /* borders, dividers */
+  --paper: #f7f5f0;        /* page background */
+  --white: #ffffff;        /* card surfaces */
+  --gold: #c9a13b;         /* decorative accent: hairlines, rings, labels on navy */
+  --gold-ink: #7a5d0e;     /* gold for small text on light backgrounds (AA) */
+  --blue: #2c4a7e;         /* hover / pressed / links */
+
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+  --r-card: 14px;
+  --r-chip: 10px;
+  --r-pill: 999px;
+  --shadow: 0 1px 2px rgba(11, 31, 69, 0.06), 0 8px 24px rgba(11, 31, 69, 0.07);
+  --maxw: 440px;
+}

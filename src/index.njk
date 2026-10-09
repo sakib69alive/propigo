@@ -1,0 +1,51 @@
+---
+permalink: index.html
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ site.site.title }}</title>
+  <meta name="description" content="{{ site.site.description }}">
+  <meta name="theme-color" content="#0b1f45">
+  <link rel="canonical" href="{{ site.site.url }}">
+  <link rel="icon" href="{{ '/favicon.svg' | url }}" type="image/svg+xml">
+  <link rel="icon" href="{{ '/favicon-32.png' | url }}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.company.name }}">
+  <meta property="og:title" content="{{ site.site.title }}">
+  <meta property="og:description" content="{{ site.site.description }}">
+  <meta property="og:url" content="{{ site.site.url }}">
+  <meta property="og:image" content="{{ site.site.url }}assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="{{ '/assets/fonts/manrope.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: "Manrope"; font-weight: 200 800; font-style: normal; font-display: swap; src: url("{{ '/assets/fonts/manrope.woff2' | url }}") format("woff2"); }
+    {{ css | safe }}
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  {# Logo is defined once and reused with <use> #}
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="logo" viewBox="{{ logoViewBox }}">{{ logoInner | safe }}</symbol></svg>
+
+  {% include "header.njk" %}
+  <main id="main" class="wrap">
+    {% include "hero.njk" %}
+    {% include "qr.njk" %}
+    {% include "about.njk" %}
+    {% include "categories.njk" %}
+    {% include "founder.njk" %}
+    {% include "socials.njk" %}
+    {% include "cta.njk" %}
+  </main>
+  {% include "footer.njk" %}
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script>{{ js | safe }}</script>
+</body>
+</html>
