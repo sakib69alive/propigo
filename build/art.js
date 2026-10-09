@@ -126,7 +126,7 @@ function skylineBg() {
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice" fill="none" stroke-linejoin="round" stroke-linecap="round">` +
     `<path d="${fine}" stroke="#c9a13b" stroke-opacity=".3" stroke-width=".7"/>` +
     `<path d="${mesh}" stroke="#c9a13b" stroke-opacity=".5" stroke-width=".8"/>` +
-    `<path d="${main}" stroke="#e0bb58" stroke-opacity=".95" stroke-width="1.2"/>` +
+    `<path d="${main}" stroke="#d2b061" stroke-opacity=".85" stroke-width="1.2"/>` +
     `</svg>`
   );
 }
