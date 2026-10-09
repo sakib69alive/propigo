@@ -25,68 +25,108 @@ function rng(seed) {
 }
 
 function skylineBg() {
-  const rand = rng(5);
-  const W = 800, H = 250, G = 175;
-  const r1 = (n) => Math.round(n * 10) / 10;
+  const rand = rng(9);
+  const W = 800, H = 400, G = 340;
+  const r = (n) => Math.round(n * 10) / 10;
   let main = "", fine = "";
-  let x = 6;
-  while (x < W - 24) {
-    const w = 22 + rand() * 30;
-    const bump = 80 * Math.exp(-Math.pow((x - W * 0.52) / 170, 2));
-    const h = 34 + rand() * 62 + bump;
-    const type = rand();
-    const t = G - h;
-    if (type < 0.25) {
-      // tower with stepped taper and antenna
-      const m = x + w / 2;
-      main += `M${r1(x)} ${G}V${r1(t + h * 0.25)}L${r1(x + w * 0.3)} ${r1(t + h * 0.08)}L${r1(m)} ${r1(t - 26)}L${r1(x + w * 0.7)} ${r1(t + h * 0.08)}L${r1(x + w)} ${r1(t + h * 0.25)}V${G}`;
-      fine += `M${r1(m)} ${r1(t - 26)}V${G}M${r1(x + w * 0.3)} ${r1(t + h * 0.08)}V${G}M${r1(x + w * 0.7)} ${r1(t + h * 0.08)}V${G}`;
-    } else if (type < 0.5) {
-      // slanted roof
-      main += `M${r1(x)} ${G}V${r1(t)}L${r1(x + w)} ${r1(t + h * 0.22)}V${G}`;
-      fine += `M${r1(x + w * 0.5)} ${r1(t + h * 0.11)}V${G}`;
-    } else if (type < 0.78) {
-      // stepped block
-      const sw = w * 0.6;
-      main += `M${r1(x)} ${G}V${r1(t + 10)}H${r1(x + (w - sw) / 2)}V${r1(t)}H${r1(x + (w + sw) / 2)}V${r1(t + 10)}H${r1(x + w)}V${G}`;
-      fine += `M${r1(x + w * 0.33)} ${r1(t + 10)}V${G}M${r1(x + w * 0.66)} ${r1(t + 10)}V${G}`;
-    } else {
-      // glass slab with facet lines
-      main += `M${r1(x)} ${G}V${r1(t)}H${r1(x + w)}V${G}`;
-      fine += `M${r1(x)} ${r1(t)}L${r1(x + w)} ${r1(t + h * 0.55)}M${r1(x + w)} ${r1(t)}L${r1(x)} ${r1(t + h * 0.55)}`;
-    }
-    for (let y = t + 12; y < G - 4; y += 11) if (rand() < 0.45) fine += `M${r1(x)} ${r1(y)}H${r1(x + w)}`;
-    x += w + 2 + rand() * 6;
-  }
+
+  // helpers
+  const mullions = (x, w, top, step) => { for (let xx = x + step; xx < x + w - 1; xx += step) fine += `M${r(xx)} ${r(top)}V${G}`; };
+  const bands = (x, w, top, step) => { for (let y = top + step; y < G - 4; y += step) fine += `M${r(x)} ${r(y)}H${r(x + w)}`; };
+
+  const kinds = {
+    // parallelogram top, glass curtain wall
+    slant(x, w, h) {
+      const t = G - h;
+      main += `M${x} ${G}V${r(t + h * 0.2)}L${r(x + w)} ${r(t)}V${G}`;
+      mullions(x, w, t + h * 0.12, 7); bands(x, w, t + h * 0.2, 18);
+    },
+    slantR(x, w, h) {
+      const t = G - h;
+      main += `M${x} ${G}V${r(t)}L${r(x + w)} ${r(t + h * 0.2)}V${G}`;
+      mullions(x, w, t + h * 0.12, 7); bands(x, w, t + h * 0.2, 18);
+    },
+    // three setbacks and an antenna
+    setback(x, w, h) {
+      const t = G - h, w2 = w * 0.78, w3 = w * 0.5, o2 = (w - w2) / 2, o3 = (w - w3) / 2;
+      const y2 = t + h * 0.18, y3 = t + h * 0.06;
+      main += `M${x} ${G}V${r(y2 + h * 0.1)}H${r(x + o2)}V${r(y3 + h * 0.06)}H${r(x + o3)}V${r(t)}H${r(x + o3 + w3)}V${r(y3 + h * 0.06)}H${r(x + o2 + w2)}V${r(y2 + h * 0.1)}H${r(x + w)}V${G}`;
+      main += `M${r(x + w / 2)} ${r(t)}V${r(t - 34)}`;
+      mullions(x, w, y2 + h * 0.1, 8); bands(x, w, y2 + h * 0.1, 16);
+    },
+    // tapering needle tower
+    needle(x, w, h) {
+      const t = G - h, m = x + w / 2;
+      main += `M${x} ${G}L${r(x + w * 0.06)} ${r(G - h * 0.45)}L${r(x + w * 0.3)} ${r(G - h * 0.82)}L${r(m)} ${r(t)}L${r(x + w * 0.7)} ${r(G - h * 0.82)}L${r(x + w * 0.94)} ${r(G - h * 0.45)}L${r(x + w)} ${G}`;
+      main += `M${r(m)} ${r(t)}V${r(t - 44)}`;
+      fine += `M${r(m)} ${r(t)}V${G}M${r(x + w * 0.3)} ${r(G - h * 0.82)}L${r(x + w * 0.2)} ${G}M${r(x + w * 0.7)} ${r(G - h * 0.82)}L${r(x + w * 0.8)} ${G}`;
+      bands(x + w * 0.2, w * 0.6, t + h * 0.2, 20);
+    },
+    // chamfered-corner supertall
+    chamfer(x, w, h) {
+      const t = G - h, c = w * 0.2;
+      main += `M${x} ${G}V${r(t + c)}L${r(x + c)} ${r(t)}H${r(x + w - c)}L${r(x + w)} ${r(t + c)}V${G}`;
+      fine += `M${r(x + c)} ${r(t)}V${G}M${r(x + w - c)} ${r(t)}V${G}`;
+      mullions(x + c, w - 2 * c, t, 7); bands(x, w, t + c, 16);
+    },
+    // tallest: tiered body, tapered crown, spire
+    spire(x, w, h) {
+      const t = G - h, m = x + w / 2, w2 = w * 0.7, o2 = (w - w2) / 2;
+      const y1 = G - h * 0.62, y2 = G - h * 0.86;
+      main += `M${x} ${G}V${r(y1)}H${r(x + o2)}V${r(y2)}L${r(m)} ${r(t)}L${r(x + o2 + w2)} ${r(y2)}V${r(y1)}H${r(x + w)}V${G}`;
+      main += `M${r(m)} ${r(t)}V${r(t - 52)}`;
+      fine += `M${r(m)} ${r(t)}V${G}`;
+      mullions(x, w, y1, 8); bands(x, w, y1, 15);
+    },
+    // rounded capsule top
+    round(x, w, h) {
+      const t = G - h, rr = w / 2;
+      main += `M${x} ${G}V${r(t + rr)}A${rr} ${rr} 0 0 1 ${r(x + w)} ${r(t + rr)}V${G}`;
+      fine += `M${r(x + w / 2)} ${r(t)}V${G}`;
+      mullions(x, w, t + rr, 8); bands(x, w, t + rr, 16);
+      for (let k = 1; k < 4; k++) fine += `M${r(x + rr - rr * Math.cos(k * 0.5))} ${r(t + rr - rr * Math.sin(k * 0.5))}H${r(x + rr + rr * Math.cos(k * 0.5))}`;
+    },
+    // flat glass slab with diagonal bracing
+    glass(x, w, h) {
+      const t = G - h;
+      main += `M${x} ${G}V${r(t)}H${r(x + w)}V${G}`;
+      fine += `M${x} ${r(t)}L${r(x + w)} ${r(t + h * 0.5)}M${r(x + w)} ${r(t)}L${x} ${r(t + h * 0.5)}`;
+      mullions(x, w, t, 9); bands(x, w, t, 20);
+    },
+  };
+
+  const plan = [
+    ["slant", 14, 52, 150], ["setback", 78, 46, 196], ["glass", 136, 58, 140], ["needle", 204, 56, 226],
+    ["chamfer", 272, 70, 262], ["spire", 352, 62, 300], ["round", 428, 56, 226], ["chamfer", 494, 66, 250],
+    ["slantR", 570, 52, 172], ["setback", 632, 56, 212], ["glass", 700, 70, 146],
+  ];
+  plan.forEach(([k, x, w, h]) => kinds[k](x, w, h));
   main += `M0 ${G}H${W}`;
 
-  // low-poly ground: three rows of jittered points joined as a triangulated mesh
-  const rows = [], cols = 24;
-  for (let r = 0; r < 4; r++) {
+  // low-poly ground
+  const rows = [], cols = 22;
+  for (let q = 0; q < 4; q++) {
     const row = [];
-    for (let i = 0; i <= cols; i++) {
-      const base = G + r * 22;
-      row.push([r1((i * W) / cols + (r ? (rand() - 0.5) * 16 : 0)), r1(base + (r === 0 ? Math.sin(i * 0.7) * 5 : 0) + (rand() - 0.5) * (r ? 12 : 0))]);
-    }
+    for (let i = 0; i <= cols; i++)
+      row.push([r((i * W) / cols + (q ? (rand() - 0.5) * 18 : 0)), r(G + q * 17 + (q ? (rand() - 0.5) * 9 : 0))]);
     rows.push(row);
   }
   let mesh = "";
-  for (let r = 0; r < rows.length; r++)
+  for (let q = 0; q < rows.length; q++)
     for (let i = 0; i <= cols; i++) {
-      const p = rows[r][i];
-      if (i < cols) mesh += `M${p[0]} ${p[1]}L${rows[r][i + 1][0]} ${rows[r][i + 1][1]}`;
-      if (r < rows.length - 1) {
-        const q = rows[r + 1][i];
-        mesh += `M${p[0]} ${p[1]}L${q[0]} ${q[1]}`;
-        const q2 = rows[r + 1][(i + 1) % (cols + 1)];
-        if (i < cols && (i + r) % 2 === 0) mesh += `M${p[0]} ${p[1]}L${q2[0]} ${q2[1]}`;
+      const p = rows[q][i];
+      if (i < cols) mesh += `M${p[0]} ${p[1]}L${rows[q][i + 1][0]} ${rows[q][i + 1][1]}`;
+      if (q < rows.length - 1) {
+        const n = rows[q + 1][i];
+        mesh += `M${p[0]} ${p[1]}L${n[0]} ${n[1]}`;
+        if (i < cols && (i + q) % 2 === 0) mesh += `M${p[0]} ${p[1]}L${rows[q + 1][i + 1][0]} ${rows[q + 1][i + 1][1]}`;
       }
     }
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice" fill="none" stroke-linejoin="round" stroke-linecap="round">` +
-    `<path d="${fine}" stroke="#c9a13b" stroke-opacity=".35" stroke-width=".7"/>` +
-    `<path d="${mesh}" stroke="#c9a13b" stroke-opacity=".55" stroke-width=".8"/>` +
-    `<path d="${main}" stroke="#d9b552" stroke-opacity=".95" stroke-width="1.1"/>` +
+    `<path d="${fine}" stroke="#c9a13b" stroke-opacity=".3" stroke-width=".7"/>` +
+    `<path d="${mesh}" stroke="#c9a13b" stroke-opacity=".5" stroke-width=".8"/>` +
+    `<path d="${main}" stroke="#e0bb58" stroke-opacity=".95" stroke-width="1.2"/>` +
     `</svg>`
   );
 }

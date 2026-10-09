@@ -275,3 +275,5 @@ a.soc:hover { background: var(--gold); color: #06122c; }
 .bg::after { display: none; }
 .hero.home { padding-bottom: 0; }
 .hero.home::after { width: 100vw; max-width: none; height: 190px; margin: var(--s6) 0 0 calc(50% - 50vw); background: var(--skyline) center bottom / auto 100% no-repeat; opacity: 0.9; -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); }
+
+.hero.home::after { height: 300px; margin-top: var(--s5); opacity: 1; }
