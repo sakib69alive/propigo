@@ -16,14 +16,14 @@
 
   function copy() {
     if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(url).then(function () { say("Link copied"); }, fallback);
+      return navigator.clipboard.writeText(url).then(function () { say("Link copied"); }, function () { fallback(); });
     }
     fallback();
   }
 
-  function fallback() {
+  function fallback(val) {
     var t = document.createElement("textarea");
-    t.value = url;
+    t.value = typeof val === "string" ? val : url;
     t.setAttribute("readonly", "");
     t.style.cssText = "position:fixed;opacity:0";
     document.body.appendChild(t);
@@ -65,4 +65,27 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && sheet.classList.contains("open")) closeSheet();
   });
+
+  var form = document.getElementById("collab");
+  if (form) {
+    form.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-send]");
+      if (!b) return;
+      if (!form.reportValidity()) return;
+      var f = form.elements;
+      var text = "Collaboration request for Propigo\n\n" +
+        "Name: " + f.name.value + "\n" +
+        "Business: " + f.business.value + "\n" +
+        "Wants to promote: " + f.sector.value + "\n" +
+        (f.website.value ? "Website: " + f.website.value + "\n" : "") +
+        "Phone / WhatsApp: " + f.phone.value + "\n" +
+        (f.email.value ? "Email: " + f.email.value + "\n" : "") +
+        "\nAbout the business:\n" + f.details.value;
+      var kind = b.dataset.send;
+      if (kind === "wa") window.open("https://wa.me/" + form.dataset.wa + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+      else if (kind === "mail") location.href = "mailto:" + form.dataset.mail + "?subject=" + encodeURIComponent("Collaboration request: " + f.business.value) + "&body=" + encodeURIComponent(text);
+      else if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function () { say("Details copied"); });
+      else fallback(text);
+    });
+  }
 })();

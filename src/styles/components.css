@@ -240,3 +240,30 @@ a.soc:hover { background: var(--gold); color: #06122c; }
 /* light founder page keeps the same restraint */
 .light .panel-card { background: #fff; border-color: #e4e2dc; }
 .light .points li, .light .tile { background: #fff; }
+
+/* ================= Rounded theme (replaces the squared corners) ================= */
+.panel-card, .tile, .cta { border-radius: 20px; }
+.panel-card::before { border-radius: 0 0 3px 3px; }
+.btn, .partner .visit { border-radius: 999px; }
+.ctile { border-radius: 16px; }
+.points li, .partner { border-radius: 16px; }
+.sheet .panel { border-radius: 24px 24px 0 0; }
+@media (min-width: 600px) { .sheet .panel { border-radius: 24px; } }
+.tile .badge { border-radius: 16px; }
+.partner .mono { border-radius: 16px; }
+
+/* clear, lining numerals in the timeline */
+.steps .num { font-family: var(--font); font-weight: 800; font-size: 1.125rem; font-variant-numeric: lining-nums; color: var(--gold-l); border-width: 1.5px; }
+
+/* ================= Collaborate form ================= */
+.cform { display: grid; gap: var(--s4); margin-top: var(--s4); }
+.cform label { display: grid; gap: var(--s2); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.04em; color: var(--text); }
+.cform input, .cform select, .cform textarea { width: 100%; font: inherit; font-size: 1rem; font-weight: 450; color: #fff; padding: 14px var(--s4); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(125, 155, 214, 0.35); border-radius: 14px; }
+.cform textarea { resize: vertical; min-height: 120px; }
+.cform select option { color: #0b1f45; }
+.cform input::placeholder { color: #7f8fab; }
+.cform input:focus, .cform select:focus, .cform textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 161, 59, 0.25); }
+.cform input:user-invalid, .cform textarea:user-invalid, .cform select:user-invalid { border-color: #e08a8a; }
+.cform .fine { font-size: 0.8125rem; line-height: 1.5; }
+.cform .actions { display: grid; gap: var(--s3); }
+.steps .num { background: #081a3f; z-index: 1; }

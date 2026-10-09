@@ -37,13 +37,7 @@ canonicalPath: ""
   <h2 id="cta-h">{{ site.cta.title }}</h2>
   <p>{{ site.cta.text }}</p>
   <div class="actions">
-    {% if site.contact.whatsapp %}
-    <a class="btn gold block" href="https://wa.me/{{ site.contact.whatsapp_digits }}?text={{ site.contact.whatsapp_message | encode }}" target="_blank" rel="noopener noreferrer">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
-    {% elif site.contact.email %}
-    <a class="btn gold block" href="mailto:{{ site.contact.email }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
-    {% else %}
-    <a class="btn gold block" href="{{ '/about/#collaborate' | url }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
-    {% endif %}
+    <a class="btn gold block" href="{{ '/collaborate/' | url }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
     <a class="btn alt block" href="{{ '/founder/' | url }}">{{ icons.user | safe }}Meet the founder</a>
   </div>
 </section>

@@ -43,7 +43,8 @@ pageDesc: "What Propigo is, what we do, who we work with and how to collaborate.
   <h2 id="collab-h">{{ sec.title }}</h2>
   {% for p in sec.text %}<p>{{ p }}</p>{% endfor %}
   {% include "contact.njk" %}
-  <a class="btn gold block" style="margin-top:var(--s4)" href="{{ '/founder/' | url }}">{{ icons.user | safe }}Meet the founder</a>
+  <a class="btn gold block" style="margin-top:var(--s4)" href="{{ '/collaborate/' | url }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
+  <a class="btn alt block" style="margin-top:var(--s3)" href="{{ '/founder/' | url }}">{{ icons.user | safe }}Meet the founder</a>
 </section>
 {% endif %}{% endfor %}
 

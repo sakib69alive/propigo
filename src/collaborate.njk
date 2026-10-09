@@ -1,0 +1,43 @@
+---
+permalink: collaborate/index.html
+canonicalPath: "collaborate/"
+pageTitle: "Collaborate with Propigo"
+pageDesc: "Share your business details to collaborate with Propigo."
+---
+{% extends "base.njk" %}
+{% block content %}
+<section class="hero sub-hero rise" aria-labelledby="h1">
+  <span class="label">Partnership</span>
+  <h1 id="h1">Collaborate with {{ site.company.name }}</h1>
+  <p class="tagline">Tell us about your business and what you would like to promote. We will review your details and get back to you.</p>
+</section>
+
+<section class="panel-card rise d1" aria-labelledby="f-h">
+  <span class="label">Your details</span>
+  <h2 id="f-h">Partner details</h2>
+  <form class="cform" id="collab" novalidate data-wa="{{ site.contact.whatsapp_digits }}" data-mail="{{ site.contact.email }}">
+    <label>Your name *<input name="name" autocomplete="name" required></label>
+    <label>Business / company name *<input name="business" autocomplete="organization" required></label>
+    <label>What would you like to promote? *
+      <select name="sector" required>
+        <option value="">Choose one</option>
+        {% for c in site.categories %}<option>{{ c.title }}</option>{% endfor %}
+        <option>Both</option>
+      </select>
+    </label>
+    <label>Business website<input name="website" type="url" inputmode="url" placeholder="https://" autocomplete="url"></label>
+    <label>Phone / WhatsApp *<input name="phone" type="tel" autocomplete="tel" required></label>
+    <label>Email<input name="email" type="email" autocomplete="email"></label>
+    <label>About your business and what you offer *<textarea name="details" rows="5" required></textarea></label>
+    <p class="fine">Nothing is stored on this website. Pressing a button below opens WhatsApp or your email app with these details ready to send to {{ site.company.name }}.</p>
+    <div class="actions">
+      {% if site.contact.whatsapp %}<button class="btn gold block js-only" type="button" data-send="wa">{{ icons.whatsapp | safe }}Send on WhatsApp</button>{% endif %}
+      {% if site.contact.email %}<button class="btn alt block js-only" type="button" data-send="mail">{{ icons.mail | safe }}Send by email</button>{% endif %}
+      <button class="btn alt block js-only" type="button" data-send="copy">{{ icons.copy | safe }}Copy details</button>
+    </div>
+    <noscript><p class="fine">Please turn on JavaScript to use this form, or contact us directly from the home page.</p></noscript>
+  </form>
+</section>
+
+<p class="backrow"><a class="more" href="{{ '/' | url }}">{{ icons['arrow-left'] | safe }}Back to {{ site.company.name }}</a></p>
+{% endblock %}

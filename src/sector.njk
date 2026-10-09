@@ -56,9 +56,7 @@ eleventyComputed:
   <h2 id="cta-h">Promote your {{ 'property' if cat.icon == 'building' else 'vehicles' }} with {{ site.company.name }}</h2>
   <p>{{ site.cta.text }}</p>
   <div class="actions">
-    {% if site.contact.whatsapp %}<a class="btn gold block" href="https://wa.me/{{ site.contact.whatsapp_digits }}?text={{ site.contact.whatsapp_message | encode }}" target="_blank" rel="noopener noreferrer">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
-    {% elif site.contact.email %}<a class="btn gold block" href="mailto:{{ site.contact.email }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
-    {% else %}<a class="btn gold block" href="{{ '/about/#collaborate' | url }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>{% endif %}
+    <a class="btn gold block" href="{{ '/collaborate/' | url }}">{{ icons.handshake | safe }}Collaborate with {{ site.company.name }}</a>
   </div>
 </section>
 
