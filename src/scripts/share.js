@@ -88,4 +88,41 @@
       else fallback(text);
     });
   }
+
+  // Heavy, weighted glide: a small scroll off the first screen carries on by itself and settles on the next section
+  var hero = document.querySelector(".hero.home");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (hero && !reduce) {
+    var lastY = 0, dir = 0, idle, touching = false, gliding = false, raf;
+    var done = function () { gliding = false; lastY = window.scrollY; };
+    var stop = function () { if (gliding) { cancelAnimationFrame(raf); done(); } };
+    var glide = function (to) {
+      var from = window.scrollY, dist = to - from, dur = Math.min(1100, 520 + Math.abs(dist) * 0.6), t0 = performance.now();
+      gliding = true;
+      (function step(now) {
+        var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 4);
+        window.scrollTo({ top: from + dist * e, behavior: "instant" });
+        if (p < 1 && gliding) raf = requestAnimationFrame(step); else done();
+      })(t0);
+    };
+    var settle = function () {
+      if (touching || gliding) return;
+      var next = hero.nextElementSibling;
+      if (!next) return;
+      var end = Math.round(next.getBoundingClientRect().top + window.scrollY - 12);
+      var y = window.scrollY;
+      if (y < 4 || y > end - 4) return;
+      glide(dir > 0 ? end : 0);
+    };
+    window.addEventListener("scroll", function () {
+      if (gliding) return;
+      dir = window.scrollY > lastY ? 1 : -1;
+      lastY = window.scrollY;
+      clearTimeout(idle);
+      idle = setTimeout(settle, 140);
+    }, { passive: true });
+    window.addEventListener("touchstart", function () { touching = true; stop(); }, { passive: true });
+    window.addEventListener("touchend", function () { touching = false; clearTimeout(idle); idle = setTimeout(settle, 140); }, { passive: true });
+    window.addEventListener("wheel", stop, { passive: true });
+  }
 })();

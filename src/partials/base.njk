@@ -61,9 +61,23 @@
   </main>
 
   <footer class="foot">
-    <svg class="mark" aria-hidden="true"><use href="#logo"/></svg>
-    <p>© {{ site.site.year }} {{ site.company.name }}</p>
-    <a class="up" href="#top">{{ icons['arrow-up'] | safe }}Back to top</a>
+    <div class="wrap">
+      <svg class="mark" aria-hidden="true"><use href="#logo"/></svg>
+      <p class="foot-name">{{ site.company.name }}</p>
+      <p class="foot-tag">{{ site.company.tagline }}</p>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="{{ '/' | url }}">Home</a>
+        <a href="{{ '/about/' | url }}">About</a>
+        {% for c in site.categories %}<a href="{{ ('/' + c.slug + '/') | url }}">{{ c.title }}</a>{% endfor %}
+        <a href="{{ '/founder/' | url }}">Founder</a>
+        <a href="{{ '/collaborate/' | url }}">Collaborate</a>
+      </nav>
+      <p class="foot-note">{{ site.company.name }} is a promotional and collaboration platform. {{ site.categories_note }}</p>
+      <div class="foot-bar">
+        <p>© {{ site.site.year }} {{ site.company.name }}. All rights reserved.</p>
+        <a class="up" href="#top">{{ icons['arrow-up'] | safe }}Back to top</a>
+      </div>
+    </div>
   </footer>
 
   <div id="toast" role="status" aria-live="polite"></div>

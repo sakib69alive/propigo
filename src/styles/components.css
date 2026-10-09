@@ -109,9 +109,18 @@ a.soc:active { transform: scale(0.95); }
 .cta .btn.alt:hover { background: #fff; color: var(--ink); }
 
 /* ================= Footer ================= */
-.foot { text-align: center; padding: var(--s6) var(--s4) var(--s7); font-size: 0.8125rem; letter-spacing: 0.04em; }
-.foot svg.mark { width: 24px; height: 29px; margin: 0 auto var(--s2); }
-.foot a.up { display: inline-flex; align-items: center; gap: var(--s1); margin-top: var(--s2); min-height: 44px; font-weight: 700; color: var(--bronze); }
+.foot { margin-top: var(--s7); padding: var(--s7) 0 var(--s6); text-align: center; border-top: 1px solid var(--line); background: rgba(245, 241, 232, 0.85); }
+.foot svg.mark { width: 30px; height: 36px; margin: 0 auto var(--s3); }
+.foot-name { font-family: var(--serif); font-size: 1.75rem; color: var(--ink); line-height: 1; }
+.foot-tag { margin: var(--s3) auto 0; max-width: 32ch; font-family: var(--serif); font-style: italic; font-size: 1.0625rem; line-height: 1.4; color: var(--ink2); }
+.foot-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1) var(--s5); margin: var(--s6) 0 var(--s5); }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 40px; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+.foot-nav a:hover { color: var(--bronze); }
+.foot-note { max-width: 44ch; margin: 0 auto; font-size: 0.8125rem; line-height: 1.6; }
+.foot-bar { margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: var(--s1); font-size: 0.75rem; letter-spacing: 0.04em; }
+.foot a.up { display: inline-flex; align-items: center; gap: var(--s1); min-height: 40px; font-weight: 700; color: var(--bronze); text-decoration: none; }
+.foot a.up .ico { width: 16px; height: 16px; }
+@media (min-width: 760px) { .foot-bar { flex-direction: row; justify-content: space-between; } }
 
 /* ================= Share / QR sheet ================= */
 .sheet { display: none; position: fixed; inset: 0; z-index: 50; align-items: end; justify-items: center; }
