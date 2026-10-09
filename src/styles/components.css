@@ -267,3 +267,11 @@ a.soc:hover { background: var(--gold); color: #06122c; }
 .cform .fine { font-size: 0.8125rem; line-height: 1.5; }
 .cform .actions { display: grid; gap: var(--s3); }
 .steps .num { background: #081a3f; z-index: 1; }
+
+/* ================= Line-art skyline background (fixed at the bottom of the screen) ================= */
+.bg::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: min(38vh, 300px); background: var(--skyline) center bottom / cover no-repeat; opacity: 0.5; -webkit-mask-image: linear-gradient(transparent, #000 35%); mask-image: linear-gradient(transparent, #000 35%); }
+
+/* Skyline lives in the hero (scrolls with the page) instead of behind everything */
+.bg::after { display: none; }
+.hero.home { padding-bottom: 0; }
+.hero.home::after { width: 100vw; max-width: none; height: 190px; margin: var(--s6) 0 0 calc(50% - 50vw); background: var(--skyline) center bottom / auto 100% no-repeat; opacity: 0.9; -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); }
