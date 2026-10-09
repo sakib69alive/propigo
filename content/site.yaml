@@ -94,6 +94,8 @@ founder:
   name: "Sakib Al Hasan"
   title: "Founder"
   photo: "founder.webp"             # file name inside assets/, e.g. "founder.jpg". Empty = initials badge
+  photo_focus: [0.62, 0.46]   # where the face is in the photo: [across, down] from 0 to 1
+  photo_zoom: 0.95        # 1 = whole photo, smaller = closer on the face
   intro: "[PLACEHOLDER] A short introduction in the founder's own words: who you are and why you started Propigo."
   statement: "[PLACEHOLDER] A sentence or two about how you like to work with partners and what a good collaboration looks like."
 

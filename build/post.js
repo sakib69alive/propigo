@@ -28,7 +28,12 @@ async function post(site, outDir) {
   if (site.founder.photo) {
     const src = path.join(root, "assets", site.founder.photo);
     if (!fs.existsSync(src)) throw new Error(`founder.photo "${site.founder.photo}" not found in assets/.`);
-    const img = sharp(src).rotate().resize(640, 640, { fit: "cover", position: "attention" });
+    const meta = await sharp(src).rotate().metadata();
+    const [fx, fy] = site.founder.photo_focus || [0.5, 0.5];
+    const side = Math.round(Math.min(meta.width, meta.height) * (site.founder.photo_zoom || 1));
+    const left = Math.max(0, Math.min(meta.width - side, Math.round(fx * meta.width - side / 2)));
+    const top = Math.max(0, Math.min(meta.height - side, Math.round(fy * meta.height - side / 2)));
+    const img = sharp(await sharp(src).rotate().extract({ left, top, width: side, height: side }).toBuffer()).resize(640, 640);
     write("assets/founder.webp", await img.clone().webp({ quality: 78 }).toBuffer());
     photoB64 = (await img.clone().resize(256, 256).jpeg({ quality: 80 }).toBuffer()).toString("base64");
   }
